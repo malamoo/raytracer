@@ -1,29 +1,45 @@
 typedef float vec3[3];
-typedef struct Cframe Cframe;
-typedef struct Ray Ray;
 
-struct Cframe {
-    vec3 e;
-    vec3 u;
-    vec3 v;
-    vec3 w;
+enum {
+    VEC3ZERO,
+    VEC3ONE,
+    VEC3RIGHT,
+    VEC3LEFT,
+    VEC3UP,
+    VEC3DOWN,
+    VEC3BACK,
+    VEC3FRONT,
+    VEC3BLACK,
+    VEC3RED,
+    VEC3GREEN,
+    VEC3BLUE,
+    VEC3YELLOW,
+    VEC3CYAN,
+    VEC3MAGENTA,
+    VEC3WHITE
 };
 
-struct Ray {
-    vec3 o;
-    vec3 d;
-};
+extern const double PI;
+extern const double INF;
+extern const double EPS;
 
-float vec3len(vec3 a);
-void vec3norm(vec3 a, vec3 vec);
-void vec3neg(vec3 a, vec3 vec);
-void vec3scale(float k, vec3 a, vec3 vec);
-void vec3add(vec3 a, vec3 b, vec3 vec);
-void vec3sub(vec3 a, vec3 b, vec3 vec);
-void vec3up(vec3 vec);
-float vec3dot(vec3 a, vec3 b);
-void vec3cross(vec3 a, vec3 b, vec3 vec);
-void vec3copy(vec3 a, vec3 vec);
-void cframecamera(vec3 eye, vec3 viewdir, Cframe *framep);
-void rayortho(float u, float v, Cframe *framep, Ray *rayp);
-void rayeval(float t, Ray *rayp, vec3 vec);
+void copystdvec3(int std, vec3 out);
+void copyvec3(vec3 a, vec3 out);
+void setvec3(float x, float y, float z, vec3 out);
+float normvec3(vec3 a);
+void setnormalizedvec3(vec3 a, vec3 out);
+void normalizevec3(vec3 out);
+void setnegvec3(vec3 a, vec3 out);
+void negvec3(vec3 out);
+void setscalevec3(float k, vec3 a, vec3 out);
+void scalevec3(float k, vec3 out);
+void addvec3(vec3 a, vec3 b, vec3 out);
+void addaddvec3(vec3 a, vec3 b, vec3 out);
+void subvec3(vec3 a, vec3 b, vec3 out);
+float dotvec3(vec3 a, vec3 b);
+void crossvec3(vec3 a, vec3 b, vec3 out);
+void reflectvec3(vec3 d, vec3 n, vec3 out);
+float clamp(float x, float min, float max);
+float max(float x, float max);
+float min(float x, float min);
+float rad(float deg);

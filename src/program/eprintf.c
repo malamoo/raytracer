@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdarg.h>
 #include <errno.h>
+#include "program.h"
 
 void eprintf(char *fmt, ...)
 {

@@ -1,5 +1,9 @@
 typedef struct Rgb Rgb;
-typedef Rgb *image;
+
+enum {
+    IMGWIDTH = 1920,
+    IMGHEIGHT = 1080
+};
 
 struct Rgb {
     uchar r;
@@ -7,11 +11,6 @@ struct Rgb {
     uchar b;
 };
 
-void imgwritebmp(char *path, image img, int width, int height);
+typedef Rgb image[IMGHEIGHT][IMGWIDTH];
 
-extern Rgb black;
-extern Rgb white;
-extern Rgb red;
-extern Rgb green;
-extern Rgb blue;
-extern Rgb yellow;
+void writebmpimage(char *path, image image);

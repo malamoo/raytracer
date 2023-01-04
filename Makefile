@@ -5,21 +5,13 @@ objs := $(patsubst %.c,$(objdir)/%.o,$(notdir $(srcs)))
 deps := $(objs:%.o=%.d)
 target := raytracer
 
-VPATH := $(sort $(dir $(srcs))) # search in all source directories
-CPPFLAGS = -MT $@ -MMD -MP -MF $(@:%.o=%.d) # generate dependency target files
-CFLAGS := -Wall -Werror -std=c99 -Iinclude
+VPATH := $(sort $(dir $(srcs)))
+CPPFLAGS = -MD
+CFLAGS := -Wall -Werror -Iinclude
 LDFLAGS :=
 LDLIBS := -lm
 CC := gcc
-
-# platform-specific configuration
-ifeq ($(OS),Windows_NT)
-	LDLIBS += -lgdi32
-	RM := del /q
-else
-	LDLIBS += -ldl -lpthread
-	RM := rm -r
-endif
+RM := rm -df
 
 .PHONY: all
 all: $(bindir)/$(target)
@@ -38,7 +30,8 @@ $(objdir):
 
 .PHONY: clean
 clean:
-	$(RM) obj bin
+	$(RM) $(objdir)/* $(bindir)/*
+	$(RM) $(objdir) $(bindir)
 
 .PHONY: echo_%
 echo_%:
